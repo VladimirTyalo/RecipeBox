@@ -1,21 +1,39 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from 'react-redux';
 
-class App extends Component {
+import  Container  from "./Container";
+import Modal from "./Modal";
+import { reducer } from './reducers';
+import { create } from './actions';
+
+const initialState = require('./initial-state').store;
+
+
+export class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Container activeRecipe={this.props.activeRecipe} recipes={this.props.recipes} />
+        <Modal activeRecipe={this.props.activeRecipe} />
       </div>
     );
   }
 }
 
-export default App;
+
+const mapStateToProps = (state) => ({
+  activeRecipe: state.activeRecipe.toJS(),
+  recipes: state.recipes.toJS()
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActive: (id, recipe) => dispatch(create.setActiveRecipe(id, recipe)),
+  addRecipe: (recipe) => dispatch(create.addRecipe(recipe)),
+});
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
