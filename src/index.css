@@ -120,3 +120,139 @@ li {
 .quantity .amount {
   margin-right: 10px;
 }
+
+.ingredient-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+
+.ingredient-input:last-of-type {
+  margin-bottom: 0;
+}
+
+.ingredient-input-name,
+.ingredient-input-amount,
+.ingredient-input-units {
+  border: none;
+  border-top: 1px solid orange;
+  border-bottom: 1px solid orange;
+  border-left: 1px solid orange;
+  padding: 3px;
+  padding-left: 10px;
+}
+
+.ingredient-input-name {
+  flex: 1 1 320px;
+}
+
+.ingredient-input-amount {
+  width: 100px;
+}
+
+.ingredient-input-units {
+  width: 100px;
+  border-right: 1px solid orange;
+}
+
+.ingredient-input-remove {
+  width: 40px;
+  height: 40px;
+  background: indianred;
+  color: white;
+  font-size: 20px;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 15%;
+  right: 15%;
+  transition: 0.5s;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-wrapper--hidden {
+  transform: translateY(-300%);
+  opacity: 0;
+}
+
+.modal-add-ingredient {
+  width: 40px;
+  height: 40px;
+  background: dodgerblue;
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-url {
+  font-size: 0;
+  margin-top: 10px;
+}
+
+.modal-url-label {
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 16px;
+  padding: 5px;
+  padding-left: 15px;
+  background: #D5C2AB;
+  line-height: 2;
+  border: 1px solid #D5C2AB;
+  width: 100px;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+.modal-url-input {
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 16px;
+  padding: 5px;
+  padding-left: 20px;
+  border: 1px solid #D5C2AB;
+  line-height: 2;
+  width: calc(100% - 100px);
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+.modal-workflow-input {
+  min-width: 100%;
+  padding: 10px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.modal-cancel,
+.modal-save {
+  color: white;
+  padding: 10px;
+  border-radius: 0.5em;
+  float: right;
+  border: none;
+}
+
+.modal-cancel {
+  background: indianred;
+}
+
+.modal-save {
+  background: seagreen;
+  margin-right: 10px;
+}

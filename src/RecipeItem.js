@@ -4,10 +4,6 @@ import uuid from 'uuid';
 
 
 class Info extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (this.props.isActive) {
       this.refs.info.classList.add("recipe-info--active");

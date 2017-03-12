@@ -13,7 +13,7 @@ export class Accordion extends Component {
   }
 
   handleDelete(id) {
-   this.props.delete(id, this.props.recipes);
+    this.props.delete(id, this.props.recipes);
   }
 
   render() {
@@ -26,7 +26,7 @@ export class Accordion extends Component {
           return (
             <RecipeItem key={uuid.v4()}
               title={recipe.title}
-              isActive={id == this.props.activeRecipe.id}
+              isActive={id === this.props.activeRecipe.id}
               description={recipe.workflow}
               img={recipe.img}
               ingredients={recipe.ingredients}

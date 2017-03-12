@@ -14,7 +14,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <Container activeRecipe={this.props.activeRecipe} recipes={this.props.recipes} />
+      {/*  <Container activeRecipe={this.props.activeRecipe} recipes={this.props.recipes} /> */}
         <Modal activeRecipe={this.props.activeRecipe} />
       </div>
     );
