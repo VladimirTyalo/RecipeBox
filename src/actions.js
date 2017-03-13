@@ -14,7 +14,11 @@ export const actionType = {
   CLOSE_MODAL: "CLOSE_MODAL",
   SET_NAME: "SET_NAME",
   SET_AMOUNT: "SET_AMOUNT",
-  SET_UNITS: "SET_UNITS"
+  SET_UNITS: "SET_UNITS",
+  SET_FOCUS_ID: "SET_FOCUS_ID",
+  SET_IMG: "SET_IMG",
+  SET_WORKFLOW: "SET_WORKFLOW",
+  SET_TITLE: "SET_TITLE"
 };
 
 // action creators
@@ -81,6 +85,26 @@ export const create = {
     type: actionType.SET_UNITS,
     units,
     index
+  }),
+
+  setFocusId: (id) => ({
+    type: actionType.SET_FOCUS_ID,
+    id
+  }),
+
+  setImg: (img) => ({
+    type: actionType.SET_IMG,
+    img
+  }),
+
+  setWorkflow: (workflow) => ({
+    type: actionType.SET_WORKFLOW,
+    workflow
+  }),
+
+  setTitle: (title) => ({
+    type: actionType.SET_TITLE,
+    title
   })
 };
 

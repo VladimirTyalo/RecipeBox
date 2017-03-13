@@ -1,6 +1,6 @@
 export const store = {
-  isEditing: false,
-  setFocus: null,
+  isEditing: true,
+  focusId: "#",
   recipes: {
     111: {
       title: "Cake",

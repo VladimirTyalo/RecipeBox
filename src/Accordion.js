@@ -16,6 +16,12 @@ export class Accordion extends Component {
     this.props.delete(id, this.props.recipes);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextProps.isEditing) return false;
+    return true;
+  }
+  
+
   render() {
     return (
       <section className="col-xs-12 col-sm-6">
@@ -49,7 +55,8 @@ function toArray(obj) {
 
 const mapStateToProps = state => ({
   recipes: state.recipes.toJS(),
-  activeRecipe: state.activeRecipe.toJS()
+  activeRecipe: state.activeRecipe.toJS(),
+  isEditing: state.isEditing
 });
 
 const mapDispatchToProps = dispatch => ({

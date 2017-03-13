@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 
-import  Container  from "./Container";
+import Container from "./Container";
 import Modal from "./Modal";
 import { reducer } from './reducers';
 import { create } from './actions';
@@ -14,7 +14,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-      {/*  <Container activeRecipe={this.props.activeRecipe} recipes={this.props.recipes} /> */}
+        <Container activeRecipe={this.props.activeRecipe} recipes={this.props.recipes} />
         <Modal activeRecipe={this.props.activeRecipe} />
       </div>
     );

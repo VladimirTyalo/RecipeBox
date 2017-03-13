@@ -10,7 +10,6 @@ export const reducer = {
     switch (action.type) {
       case actionType.ADD_RECIPE: {
         const id = uuid.v4();
-
         return state.merge(fromJS({ [id]: action.recipe }));
       }
       case actionType.DELETE_RECIPE: {
@@ -20,8 +19,7 @@ export const reducer = {
       case actionType.EDIT_RECIPE: {
         const recipe = state.get(action.id);
         if (!recipe) return state;
-
-        return state.merge(fromJS({ [action.id]: action.newRecipe }));
+        return state.merge(fromJS({ [action.id]: action.newRecipe.get("recipe") }));
       }
       default: return state;
     }
@@ -35,39 +33,42 @@ export const reducer = {
       case actionType.DISABLE_ACTIVE: {
         return fromJS({ id: -111, recipe: { ...state.get("recipe") } });
       }
-      // case actionType.ADD_INGREDIENT: {
-      //   const newIngredients = state.get("recipe").get("ingredients").push(action.ingredient);
-      //   return state.setIn(["recipe", "ingredients"], newIngredients);
-      // }
-
-      // case actionType.DELETE_INGREDIENT: {
-      //   const newIngredients = state.get("recipe").get("ingredients").delete(action.id);
-      //   return state.setIn(["recipe", "ingredients"], newIngredients);
-      // }
-
-      default: return state;
-    }
-  },
-
-  ingredients: (state = fromJS([]), action) => {
-    switch (action.type) {
-      case actionType.SET_NAME: {
-        return state.setIn([action.index, "name"], action.name);
-      }
-      case actionType.SET_AMOUNT: {
-        return state.setIn([action.index], action.amount);
-      }
-      case actionType.SET_UNITS: {
-        return state.setIn([String(action.index)], action.units);
-      }
       case actionType.ADD_INGREDIENT: {
-        const newIngredients = state.push(action.ingredient);
-        return state.setIn(["ingredients"], newIngredients);
+        const newIngredients = state.get("recipe").get("ingredients").push(action.ingredient);
+        return state.setIn(["recipe", "ingredients"], newIngredients);
       }
 
       case actionType.DELETE_INGREDIENT: {
         const newIngredients = state.get("recipe").get("ingredients").delete(action.id);
         return state.setIn(["recipe", "ingredients"], newIngredients);
+      }
+
+      case actionType.SET_NAME: {
+        return state.setIn(["recipe", "ingredients", action.index, "name"], action.name);
+      }
+      case actionType.SET_AMOUNT: {
+        return state.setIn(["recipe", "ingredients", action.index, "amount"], action.amount);
+      }
+      case actionType.SET_UNITS: {
+        return state.setIn(["recipe", "ingredients", action.index, "units"], action.units);
+      }
+      case actionType.SET_TITLE: {
+        return state.setIn(["recipe", "title"], action.title);
+      }
+      case actionType.SET_IMG: {
+        return state.setIn(["recipe", "img"], action.img);
+      }
+      case actionType.SET_WORKFLOW: { 
+        return state.setIn(["recipe", "workflow"], action.workflow);
+      }
+      default: return state;
+    }
+  },
+
+  setFocusId: (state = "#", action) => {
+    switch(action.type) {
+      case actionType.SET_FOCUS_ID: {
+        return action.id;
       }
       default: return state;
     }

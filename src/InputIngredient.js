@@ -7,27 +7,55 @@ export class InputIngredient extends Component {
     this.props.delete();
   }
 
+  componentDidMount() {
+    const el = document.getElementById(this.props.currentFocus);
+    el && el.focus();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const el = document.getElementById(this.props.currentFocus);
+    el && el.focus();
+  }
+
   handleName(ev) {
     const el = this.refs["input-name"];
     this.props.setName(el.value);
+    this.props.setFocus(el.id);
+  }
+
+  handleAmount() {
+    const el = this.refs["input-amount"];
+    this.props.setAmount(Number(el.value));
+    this.props.setFocus(el.id);
+  }
+
+  handleUnits() {
+    const el = this.refs["input-units"];
+    this.props.setUnits(el.value);
+    this.props.setFocus(el.id);
   }
 
   render() {
-    const {ingredient} = this.props;
+    const {ingredient, dataKey} = this.props;
     const {name, amount, units} = ingredient;
-
+    
     return (
       <div className="ingredient-input">
-        <input ref="input-name" className="ingredient-input-name" type="text" defaultValue={name} placeholder="ingredient" 
-        onChange={this.handleName.bind(this)}
-        value={this.props.name}/>
-        <input ref="input-amount"
-         className="ingredient-input-amount"
-          type="number" defaultValue={amount} />
-        <input ref="input-units" className="ingredient-input-units"
-         type="text" 
-         defaultValue={units}
-         />
+        <input id={dataKey + "name"} ref="input-name" className="ingredient-input-name" type="text" placeholder="ingredient"
+          onChange={this.handleName.bind(this)}
+          value={name}
+        />
+        <input id={dataKey + "amount"} ref="input-amount"
+          className="ingredient-input-amount"
+          type="number"
+          onChange={this.handleAmount.bind(this)}
+          value={amount}
+        />
+        <input id={dataKey + "units"} ref="input-units" className="ingredient-input-units"
+          type="text"
+          onChange={this.handleUnits.bind(this)}
+          value={units}
+        />
         <div className="ingredient-input-remove" onClick={this.handleClick.bind(this)}>x</div>
       </div>
     );

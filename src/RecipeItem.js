@@ -1,5 +1,8 @@
 import React, { PropTypes, Component } from 'react';
+import { connect } from 'react-redux';
 import uuid from 'uuid';
+
+import { create } from './actions';
 
 
 
@@ -10,6 +13,10 @@ class Info extends Component {
     } else {
       this.refs.info.classList.add("recipe-info--closed");
     }
+  }
+
+  handleEdit() {
+    this.props.open();
   }
 
   render() {
@@ -29,7 +36,7 @@ class Info extends Component {
         </ul>
         <div className="description">{props.description}</div>
         <div className="recipe-controls">
-          <button className="btn btn-success recipe-btn" type="button">Edit</button>
+          <button className="btn btn-success recipe-btn" type="button" onClick={this.handleEdit.bind(this)}>Edit</button>
           <button className="btn btn-danger recipe-btn" onClick={props.delete}>Delete</button>
         </div>
       </div>
@@ -45,6 +52,16 @@ Info.propTypes = {
     units: PropTypes.string.isRequired
   }))
 };
+
+const mapStateToProps = state => ({
+  isEditing: state.isEditing
+});
+
+const mapDispatchToProps = dispatch => ({
+  open: () => dispatch(create.openModal())
+});
+
+const ConnectedInfo = connect(mapStateToProps, mapDispatchToProps)(Info);
 
 class RecipeItem extends Component {
 
@@ -76,7 +93,7 @@ class RecipeItem extends Component {
           onClick={this.handleClick}>
           {this.props.title}
         </h3>
-        <Info {...this.props} delete={this.props.delete.bind(this)} />
+        < ConnectedInfo {...this.props} delete={this.props.delete.bind(this)} />
       </li>
     );
   }

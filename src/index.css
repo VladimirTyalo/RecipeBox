@@ -179,6 +179,10 @@ li {
   transition: 0.5s;
   transform: translateY(0);
   opacity: 1;
+  background: ghostwhite;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  z-index: 1000;
 }
 
 .modal-wrapper--hidden {
@@ -255,4 +259,12 @@ li {
 .modal-save {
   background: seagreen;
   margin-right: 10px;
+}
+
+.modal-title {
+  margin-left: 10px;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: none;
+  border-bottom: 1px solid orange;
 }
