@@ -18,14 +18,14 @@ export const actionType = {
   SET_FOCUS_ID: "SET_FOCUS_ID",
   SET_IMG: "SET_IMG",
   SET_WORKFLOW: "SET_WORKFLOW",
-  SET_TITLE: "SET_TITLE"
+  SET_TITLE: "SET_TITLE",
+  COPY_ACTIVE_RECIPE: "COPY_ACTIVE_RECIPE"
 };
 
 // action creators
 export const create = {
-  addRecipe: (recipe) => ({
-    type: actionType.ADD_RECIPE,
-    recipe
+  addRecipe: () => ({
+    type: actionType.ADD_RECIPE
   }),
 
   editRecipe: (id, newRecipe) => ({
@@ -105,6 +105,11 @@ export const create = {
   setTitle: (title) => ({
     type: actionType.SET_TITLE,
     title
+  }),
+
+  copyActiveRecipe: (id) => ({
+    type: actionType.COPY_ACTIVE_RECIPE,
+    id
   })
 };
 

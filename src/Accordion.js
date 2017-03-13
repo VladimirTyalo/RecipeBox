@@ -24,11 +24,11 @@ export class Accordion extends Component {
 
   render() {
     return (
-      <section className="col-xs-12 col-sm-6">
+      <section>
         {toArray(this.props.recipes).map(entry => {
-
           const recipe = entry[1];
           const id = entry[0];
+          
           return (
             <RecipeItem key={uuid.v4()}
               title={recipe.title}

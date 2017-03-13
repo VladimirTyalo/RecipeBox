@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { create } from './actions';
-
+import { fromJS } from 'immutable';
 import IngredientInput from './InputIngredient';
 
 
@@ -12,7 +12,6 @@ class Modal extends Component {
     const ingr = { name: "", amount: 0, units: "" };
     this.props.addIngredient(ingr);
   }
-
 
   handleDelete(index) {
     this.props.delete(index);
@@ -36,13 +35,14 @@ class Modal extends Component {
   }
 
   handleClose() {
-    this.props.close();
+    const {close, setActiveRecipe, activeId, recipes} = this.props;
+    this.props.close(activeId);
   }
 
   render() {
     const {img, ingredients, workflow, title, isEditing} = this.props;
     return (
-      <div className={isEditing? "modal-wrapper" : "modal-wrapper modal-wrapper--hidden"}>
+      <div className={isEditing ? "modal-wrapper" : "modal-wrapper modal-wrapper--hidden"}>
         <label htmlFor="modal-title">Recipe Name</label>
         <input type="text"
           className="modal-title"
@@ -101,16 +101,19 @@ class Modal extends Component {
 }
 
 
-const mapStateToProps = state => ({
-  ingredients: state.activeRecipe.get("recipe").get("ingredients").toJS(),
-  title: state.activeRecipe.get("recipe").get("title"),
-  img: state.activeRecipe.get("recipe").get("img"),
-  workflow: state.activeRecipe.get("recipe").get("workflow"),
-  isEditing: state.isEditing,
-  focusId: state.focusId,
-  activeId: state.activeRecipe.get("id"),
-  activeRecipe: state.activeRecipe
-});
+const mapStateToProps = state => {
+  return {
+    ingredients: state.activeRecipe.get("recipe").get("ingredients").toJS(),
+    title: state.activeRecipe.get("recipe").get("title"),
+    img: state.activeRecipe.get("recipe").get("img"),
+    workflow: state.activeRecipe.get("recipe").get("workflow"),
+    isEditing: state.isEditing,
+    focusId: state.focusId,
+    activeId: state.activeRecipe.get("id"),
+    activeRecipe: state.activeRecipe,
+    recipes: state.recipes.toJS()
+  };
+};
 
 
 const mapDispatchToProps = dispatch => ({
@@ -127,8 +130,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch(create.editRecipe(id, recipe));
     dispatch(create.closeModal());
   },
-  close: () => {
+  close: (id) => {
     dispatch(create.closeModal());
+    dispatch(create.copyActiveRecipe(id));
+  },
+  setActiveRecipe: (id, recipe) => dispatch(create.setActiveRecipe(id, recipe)),
+  addRecipe: (recipe, id) => {
+    dispatch(create.addRecipe(recipe));
+    dispatch(create.setActiveRecipe(id, recipe));
   }
 });
 

@@ -1,5 +1,5 @@
 export const store = {
-  isEditing: true,
+  isEditing: false,
   focusId: "#",
   recipes: {
     111: {

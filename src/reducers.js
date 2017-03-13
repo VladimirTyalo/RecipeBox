@@ -31,7 +31,7 @@ export const reducer = {
         return fromJS({ id: action.id, recipe: action.recipe });
       }
       case actionType.DISABLE_ACTIVE: {
-        return fromJS({ id: -111, recipe: { ...state.get("recipe") } });
+        return fromJS({ id: 0, recipe: { ...state.get("recipe").toJS() } });
       }
       case actionType.ADD_INGREDIENT: {
         const newIngredients = state.get("recipe").get("ingredients").push(action.ingredient);
