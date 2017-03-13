@@ -268,3 +268,36 @@ li {
   border: none;
   border-bottom: 1px solid orange;
 }
+
+@media (max-width: 700px) {
+  .modal-wrapper {
+    left: 2%;
+    right: 2%;
+  }
+
+  .ingredient-input-remove {
+    flex: 0 0 40px;
+    vertical-align: middle;
+  }
+}
+
+@media (max-width: 500px) {
+  .ingredient-input {
+    flex-wrap: wrap;
+  }
+
+  .ingredient-input-remove {
+    margin-top: 5px;
+  }
+
+  .ingredient-input > *:not(:last-child) {
+    flex: 1 0 100%;
+    border-right: 1px solid orange;
+    border-bottom: none;
+  }
+
+   .ingredient-input > *:last-of-type {
+    border-bottom: 1px solid orange;
+    
+   }
+}
