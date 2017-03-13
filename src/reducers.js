@@ -33,18 +33,55 @@ export const reducer = {
         return fromJS({ id: action.id, recipe: action.recipe });
       }
       case actionType.DISABLE_ACTIVE: {
-        return fromJS({id: -111, recipe: {...state.get("recipe")}});
+        return fromJS({ id: -111, recipe: { ...state.get("recipe") } });
+      }
+      // case actionType.ADD_INGREDIENT: {
+      //   const newIngredients = state.get("recipe").get("ingredients").push(action.ingredient);
+      //   return state.setIn(["recipe", "ingredients"], newIngredients);
+      // }
+
+      // case actionType.DELETE_INGREDIENT: {
+      //   const newIngredients = state.get("recipe").get("ingredients").delete(action.id);
+      //   return state.setIn(["recipe", "ingredients"], newIngredients);
+      // }
+
+      default: return state;
+    }
+  },
+
+  ingredients: (state = fromJS([]), action) => {
+    switch (action.type) {
+      case actionType.SET_NAME: {
+        return state.setIn([action.index, "name"], action.name);
+      }
+      case actionType.SET_AMOUNT: {
+        return state.setIn([action.index], action.amount);
+      }
+      case actionType.SET_UNITS: {
+        return state.setIn([String(action.index)], action.units);
       }
       case actionType.ADD_INGREDIENT: {
-        const newIngredients = state.get("recipe").get("ingredients").push(action.ingredient);;
-        return state.setIn(["recipe", "ingredients"], newIngredients);
+        const newIngredients = state.push(action.ingredient);
+        return state.setIn(["ingredients"], newIngredients);
       }
 
       case actionType.DELETE_INGREDIENT: {
-        const newIngredients = state.get("recipe").get("ingredients").filter(el => JSON.stringify(el) !== JSON.stringify(action.ingredient));
+        const newIngredients = state.get("recipe").get("ingredients").delete(action.id);
         return state.setIn(["recipe", "ingredients"], newIngredients);
       }
       default: return state;
     }
   },
+
+  isEditing: (state = false, action) => {
+    switch (action.type) {
+      case actionType.OPEN_MODAL: {
+        return true;
+      }
+      case actionType.CLOSE_MODAL: {
+        return false;
+      }
+      default: return state;
+    }
+  }
 };
