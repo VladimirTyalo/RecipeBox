@@ -7,7 +7,7 @@
 /coverage
 
 # production
-/build
+
 
 # misc
 .DS_Store
@@ -18,5 +18,5 @@ yarn-error.log*
 
 
 #playground
-.sandbox
-.vscode
+/.sandbox
+/.vscode
