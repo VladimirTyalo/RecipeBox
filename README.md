@@ -4,3 +4,5 @@
 ## How to use
  assuming that you have node.js and npm installed, just run command `npm run start`
  from root directory
+
+## Live [Application](https://vladimirtyalo.github.io/RecipeBox/) on gh-pages
