@@ -1,11 +1,10 @@
 import { combineReducers, createStore } from "redux";
-import { Map, List, fromJS, toJS } from "immutable";
-import { composeWithDevTools, devToolsEnhancer } from 'redux-devtools-extension';
+import { Map, fromJS } from "immutable";
 import uuid from 'uuid';
 
-import { actionType, create } from "./actions";
+import { actionType } from "./actions";
 import { reducer } from "./reducers";
-const {recipes, activeRecipe, isEditing, ingredients, setFocusId } = reducer;
+const {recipes, activeRecipe, isEditing, setFocusId } = reducer;
 
 const initState = localStorage.getItem("reduxState") ?
   JSON.parse(localStorage.getItem("reduxState"))
@@ -33,7 +32,7 @@ const Reducer = (state = Map({}), action) => {
         isEditing: state.isEditing,
         focusId: state.focusId,
         recipes: state.recipes,
-        activeRecipe: fromJS({ id: state.activeRecipe.get("id"), recipe: newActive })
+        activeRecipe: fromJS({ id: id, recipe: newActive })
       };
     }
     case actionType.EDIT_RECIPE: {

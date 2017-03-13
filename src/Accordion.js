@@ -21,10 +21,9 @@ export class Accordion extends Component {
     return true;
   }
   
-
   render() {
     return (
-      <section>
+      <section className="col-xs-12 col-sm-6">
         {toArray(this.props.recipes).map(entry => {
           const recipe = entry[1];
           const id = entry[0];

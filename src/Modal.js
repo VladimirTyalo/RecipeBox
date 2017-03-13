@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
 import { create } from './actions';
-import { fromJS } from 'immutable';
+
 import IngredientInput from './InputIngredient';
 
 
@@ -19,36 +19,40 @@ class Modal extends Component {
 
   handleImg() {
     this.props.setImg(this.refs.url.value);
+    this.props.focus(this.refs.url.id);
   }
 
   handleWorkflow() {
     this.props.setWorkflow(this.refs.workflow.value);
+    this.props.focus(this.refs.workflow.id);
   }
 
   handleTitle() {
     this.props.setTitle(this.refs.title.value);
+    this.props.focus(this.refs.title.id);
   }
 
   handleSave() {
     const {activeRecipe, activeId} = this.props;
-    this.props.saveRecipe("" + this.props.activeId, this.props.activeRecipe);
+    this.props.saveRecipe("" + activeId, activeRecipe);
   }
 
   handleClose() {
-    const {close, setActiveRecipe, activeId, recipes} = this.props;
-    this.props.close(activeId);
+    const {close, activeId} = this.props;
+    close(activeId);
   }
 
   render() {
-    const {img, ingredients, workflow, title, isEditing} = this.props;
+    const {ingredients, isEditing} = this.props;
     return (
       <div className={isEditing ? "modal-wrapper" : "modal-wrapper modal-wrapper--hidden"}>
         <label htmlFor="modal-title">Recipe Name</label>
-        <input type="text"
+        <input 
+          id="title"
+          type="text"
+          ref="title"
           className="modal-title"
           onChange={this.handleTitle.bind(this)}
-          ref="title"
-          id="modal-title"
           value={this.props.title}
         />
 
@@ -73,10 +77,12 @@ class Modal extends Component {
         </div>
         <div className="modal-url">
           <div className="modal-url-label">Image url: </div>
-          <input type="text"
+          <input 
+            id="img-url"
+            ref="url"
+            type="text"
             className="modal-url-input"
             onChange={this.handleImg.bind(this)}
-            ref="url"
             value={this.props.img}
           />
         </div>

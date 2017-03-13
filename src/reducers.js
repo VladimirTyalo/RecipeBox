@@ -1,6 +1,6 @@
-import { create, actionType } from "./actions";
+import { actionType } from "./actions";
 import uuid from "uuid";
-import { Map, List, fromJS } from "immutable";
+import { Map, fromJS } from "immutable";
 
 const initialState = Map({});
 

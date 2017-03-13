@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 
 import Container from "./Container";
 import Modal from "./Modal";
-import { reducer } from './reducers';
 import { create } from './actions';
-
-const initialState = require('./initial-state').store;
 
 
 export class App extends Component {
@@ -20,7 +17,6 @@ export class App extends Component {
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   activeRecipe: state.activeRecipe.toJS(),

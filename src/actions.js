@@ -1,4 +1,4 @@
-import {fromJS, toJS} from 'immutable';
+import {fromJS} from 'immutable';
 
 export const actionType = {
   ADD_RECIPE: "ADD_RECIPE",
